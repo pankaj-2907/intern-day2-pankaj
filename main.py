@@ -30,6 +30,9 @@ def health_check():
 # --- Endpoint 2: Text Analysis ---
 @app.post("/text/analyze")
 def analyze_text(payload: TextAnalyzeRequest):
+
+    if not payload.text.strip():
+        raise HTTPException(status_code=400, detail="Text cannot be empty")
     text = payload.text
     
     # Word count (using regex to count pure words)
