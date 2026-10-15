@@ -77,4 +77,3 @@ The `.env` file resides in the root directory of the project alongside `main.py`
 
 * **AI Service Integration (`ai_service.py`):** The initialization of the official Google GenAI SDK client (`genai.Client`) and the specific model parameter syntax (`gemini-flash-latest`) were structured and refined with AI assistance to ensure compatibility with current API standards.
 * **Error Handling & Exception Wrapping:** The `try...except` exception wrapping blocks in both `ai_service.py` and `main.py` were optimized with AI guidance to map backend errors cleanly to HTTP status codes (`400`, `422`, `500`).
-* **Boilerplate Structure:** FastAPI route definitions and Pydantic validation models were crafted following standard FastAPI best practices.
