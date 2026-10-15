@@ -2,7 +2,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 import re
-from ai_service import generate_ai_summary
+from ai_service import generate_ai_summary, translate_text
 
 app = FastAPI(title="Day 2 Assignment - FastAPI & Gemini AI")
 
@@ -12,6 +12,9 @@ class TextAnalyzeRequest(BaseModel):
 
 class TextSummarizeRequest(BaseModel):
     text: str = Field(..., min_length=20, description="Paragraph or text to summarize")
+
+class TextTranslateRequest(BaseModel):
+    text: str = Field(..., min_length=15, description="Paragraph or text to translate")
 
 
 # --- Endpoint 1: Health Check ---
@@ -49,6 +52,19 @@ def summarize_text_endpoint(payload: TextSummarizeRequest):
         # Calling AI service to summarize
         summary = generate_ai_summary(payload.text)
         return {"summary": summary}
+    
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
+# --- Endpoint 4: AI Translation ---
+@app.post("/text/translate")
+def translate_text_endpoint(payload: TextTranslateRequest):
+    try:
+        # Calling AI service to translate
+        translation = translate_text(payload.text)
+        return {"translation": translation}
     
     except ValueError as ve:
         raise HTTPException(status_code=400, detail=str(ve))

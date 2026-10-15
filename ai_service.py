@@ -27,3 +27,20 @@ def generate_ai_summary(text: str) -> str:
         return response.text
     except Exception as e:
         raise RuntimeError(f"Gemini API Error: {str(e)}")
+
+def translate_text(text: str) -> str:
+    """
+    This function take text and use Gemini AI to translate it.
+    """
+    if not text or not text.strip():
+        raise ValueError("Text input cannot be empty.")
+    
+    try:
+        # Giving prompt to Gemini AI.
+        response = client.models.generate_content(
+            model="gemini-flash-latest",
+            contents=f"Provide translation in Hindi and sanskrit for the following text:\n\n{text}"
+        )
+        return response.text
+    except Exception as e:
+        raise RuntimeError(f"Gemini API Error: {str(e)}")
