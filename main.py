@@ -43,7 +43,8 @@ def analyze_text(payload: TextAnalyzeRequest):
     return {
         "word_count": word_count,
         "character_count": character_count,
-        "uppercase_text": uppercase_text
+        "uppercase_text": uppercase_text,
+        "status" : "done"
     }
 
 
