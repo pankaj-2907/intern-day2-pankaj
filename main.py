@@ -72,3 +72,7 @@ def translate_text_endpoint(payload: TextTranslateRequest):
         raise HTTPException(status_code=400, detail=str(ve))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
+@app.get("/word-frequency")
+def word_frequency():
+    return {"endpoint": "word-frequency", "status": "active"}
