@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 import re
 from ai_service import generate_ai_summary, translate_text
+from collections import Counter
 
 app = FastAPI(title="Day 2 Assignment - FastAPI & Gemini AI")
 
@@ -16,6 +17,9 @@ class TextSummarizeRequest(BaseModel):
 class TextTranslateRequest(BaseModel):
     text: str = Field(..., min_length=15, description="Paragraph or text to translate")
 
+class WordFrequencyRequest(BaseModel):
+    text: str = Field(..., min_length=1, description="Text for word frequency analysis")
+
 
 # --- Endpoint 1: Health Check ---
 @app.get("/health")
@@ -26,6 +30,9 @@ def health_check():
 # --- Endpoint 2: Text Analysis ---
 @app.post("/text/analyze")
 def analyze_text(payload: TextAnalyzeRequest):
+
+    if not payload.text.strip():
+        raise HTTPException(status_code=400, detail="Text cannot be empty")
     text = payload.text
     
     # Word count (using regex to count pure words)
@@ -70,3 +77,11 @@ def translate_text_endpoint(payload: TextTranslateRequest):
         raise HTTPException(status_code=400, detail=str(ve))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
+# --- Endpoint 5: Word Frequency ---
+@app.post("/text/word-frequency")
+def word_frequency_endpoint(payload: WordFrequencyRequest):
+    # Extract words using regex and count frequencies case-insensitively
+    words = re.findall(r'\b\w+\b', payload.text.lower())
+    frequency = dict(Counter(words))
+    return {"word_frequency": frequency}
