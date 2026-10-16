@@ -1,4 +1,4 @@
-## Part A: Core Concepts
+## Part A: Core Concepts                
 
 ### 1. Version Control
 * **What it means:** A system that records changes to a file or set of files over time so that you can recall specific versions later.
