@@ -20,8 +20,10 @@ class TextTranslateRequest(BaseModel):
 # --- Endpoint 1: Health Check ---
 @app.get("/health")
 def health_check():
-    return {"status": "healthy", "service": "running"}
-
+    return {"status": "healthy", 
+            "service": "running",
+            "checks_passed": True}
+    
 
 # --- Endpoint 2: Text Analysis ---
 @app.post("/text/analyze")
