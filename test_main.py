@@ -16,4 +16,4 @@ def test_reproduce_bug():
     response = client.post("/text/analyze", json={"text": ""})
     # Kyunki min_length=1 hai, agar validation fail hoti hai toh 400 aana chahiye, 
     # par bug ki wajah se agar 500 (Server Error) aa raha hai, toh bug reproduce ho gaya!
-    assert response.status_code == 200
+    assert response.status_code == 422
