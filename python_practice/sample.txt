@@ -1,3 +1,0 @@
-Artificial intelligence is changing the world.
-Transformers and LLMs are powerful tools.
-Python backend development is fun!
