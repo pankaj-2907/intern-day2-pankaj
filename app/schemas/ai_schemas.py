@@ -1,3 +1,5 @@
+# ai_schema
+
 from pydantic import BaseModel, Field
 from typing import Optional
 

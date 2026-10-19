@@ -1,3 +1,5 @@
+# ai 
+
 from fastapi import APIRouter, HTTPException
 from app.schemas.ai_schemas import (
     SummarizeRequest, SummarizeResponse,
