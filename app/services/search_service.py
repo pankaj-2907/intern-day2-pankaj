@@ -79,5 +79,33 @@ class SearchService:
 
         return unique_results
 
+    def add_document(self, doc_id: str, title: str, content: str) -> None:
+        """
+        Validates duplicate ID, generates embedding, and adds the new document to the in-memory index.
+        """
+        # 1. Check for duplicate IDs
+        if any(doc["id"] == doc_id for doc in self.documents):
+            raise ValueError(f"Document with ID '{doc_id}' already exists.")
+        
+        # 2. Generate embedding for the new content
+        try:
+            embedding = generate_embedding(content)
+        except Exception as e:
+            raise RuntimeError(f"Embedding generation failed: {str(e)}")
+        
+        # 3. Add to in-memory index
+        self.documents.append({
+            "id": doc_id,
+            "title": title,
+            "content": content
+        })
+        self.document_embeddings.append(embedding)
+
+    def get_all_documents(self) -> list[dict]:
+        """
+        Returns a list of all available documents with their IDs and titles (hiding raw embeddings).
+        """
+        return [{"id": doc["id"], "title": doc["title"]} for doc in self.documents]
+
 # Singleton instance for dependency injection or direct usage
 search_service = SearchService()

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import search
+from app.routes import search, document
 
 app = FastAPI(
     title="Semantic Document Search API",
@@ -9,6 +9,7 @@ app = FastAPI(
 
 # Include the search router
 app.include_router(search.router)
+app.include_router(document.router)
 
 @app.get("/")
 def read_root():
