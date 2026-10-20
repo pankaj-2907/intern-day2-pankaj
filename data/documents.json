@@ -1,0 +1,102 @@
+[
+  {
+    "id": "doc_001",
+    "title": "API Security Fundamentals",
+    "content": "API security includes authentication, authorization, input validation, and rate limiting to protect endpoints from malicious attacks."
+  },
+  {
+    "id": "doc_002",
+    "title": "Cloud Infrastructure Overview",
+    "content": "Cloud infrastructure provides scalable computing, storage, networking, and managed services on demand via platforms like AWS and GCP."
+  },
+  {
+    "id": "doc_003",
+    "title": "Introduction to Machine Learning",
+    "content": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from data without being explicitly programmed."
+  },
+  {
+    "id": "doc_004",
+    "title": "Generative AI and LLMs",
+    "content": "Generative AI models, such as large language models, use deep learning to generate human-like text, code, and multimedia content."
+  },
+  {
+    "id": "doc_005",
+    "title": "Database Management Systems",
+    "content": "Relational and non-relational database management systems ensure efficient data storage, retrieval, indexing, and transaction safety."
+  },
+  {
+    "id": "doc_006",
+    "title": "DevOps Practices and CI/CD",
+    "content": "DevOps bridges software development and IT operations through continuous integration, automated testing, and continuous deployment."
+  },
+  {
+    "id": "doc_007",
+    "title": "Automated Software Testing",
+    "content": "Automated testing executes predefined unit, integration, and end-to-end test suites to verify software behavior and prevent regressions."
+  },
+  {
+    "id": "doc_008",
+    "title": "Cybersecurity Best Practices",
+    "content": "Robust cybersecurity involves multi-factor authentication, regular vulnerability assessments, encryption at rest, and secure coding standards."
+  },
+  {
+    "id": "doc_009",
+    "title": "Data Engineering Pipelines",
+    "content": "Data engineering focuses on building scalable pipelines for data extraction, transformation, loading (ETL), and stream processing."
+  },
+  {
+    "id": "doc_010",
+    "title": "Microservices Architecture",
+    "content": "Microservices architecture structures an application as a collection of loosely coupled, independently deployable services communicating over APIs."
+  },
+  {
+    "id": "doc_011",
+    "title": "Containerization with Docker",
+    "content": "Docker containers package software code and all its dependencies together so applications run reliably across different computing environments."
+  },
+  {
+    "id": "doc_012",
+    "title": "Kubernetes Orchestration",
+    "content": "Kubernetes automates deployment, scaling, and management of containerized applications across clusters of host servers."
+  },
+  {
+    "id": "doc_013",
+    "title": "Version Control with Git",
+    "content": "Git is a distributed version control system that tracks changes in source code during software development, enabling team collaboration."
+  },
+  {
+    "id": "doc_014",
+    "title": "Asynchronous Programming in Python",
+    "content": "Python asyncio module enables writing concurrent code using async and await syntax, ideal for handling high-throughput network I/O operations."
+  },
+  {
+    "id": "doc_015",
+    "title": "FastAPI Web Framework",
+    "content": "FastAPI is a modern, high-performance web framework for building APIs with Python based on standard type hints and automatic OpenAPI documentation."
+  },
+  {
+    "id": "doc_016",
+    "title": "Vector Embeddings in AI",
+    "content": "Vector embeddings convert unstructured text, images, or audio into dense numerical arrays that capture semantic meaning for similarity search."
+  },
+  {
+    "id": "doc_017",
+    "title": "Cosine Similarity Mathematics",
+    "content": "Cosine similarity measures the cosine of the angle between two multi-dimensional vectors to determine how directionally aligned their meanings are."
+  },
+  {
+    "id": "doc_018",
+    "title": "RESTful API Design Principles",
+    "content": "REST architecture uses standard HTTP methods like GET, POST, PUT, and DELETE with stateless client-server communication and resource-based URLs."
+  },
+  {
+    "id": "doc_019",
+    "title": "SQL vs NoSQL Databases",
+    "content": "SQL databases provide structured tables with ACID guarantees, while NoSQL databases offer flexible schemas designed for horizontal scalability."
+  },
+  {
+    "id": "doc_020",
+    "title": "Software Error Handling and Logging",
+    "content": "Proper error handling, custom exceptions, and structured logging ensure applications fail gracefully and provide actionable debugging insights."
+  }
+]
