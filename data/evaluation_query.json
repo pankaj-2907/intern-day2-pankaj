@@ -1,0 +1,42 @@
+[
+  {
+    "query": "How can I prevent unauthorized API usage?",
+    "relevant_document_ids": ["doc_001"]
+  },
+  {
+    "query": "How do I host an application using cloud services?",
+    "relevant_document_ids": ["doc_002"]
+  },
+  {
+    "query": "What is automated software testing?",
+    "relevant_document_ids": ["doc_021"]
+  },
+  {
+    "query": "Securing web services and endpoints",
+    "relevant_document_ids": ["doc_001"]
+  },
+  {
+    "query": "Deploying apps to the cloud",
+    "relevant_document_ids": ["doc_002"]
+  },
+  {
+    "query": "How to write unit tests in Python?",
+    "relevant_document_ids": ["doc_021"]
+  },
+  {
+    "query": "Best practices for securing backend tokens",
+    "relevant_document_ids": ["doc_001"]
+  },
+  {
+    "query": "Cloud infrastructure deployment guides",
+    "relevant_document_ids": ["doc_002"]
+  },
+  {
+    "query": "Verifying software behavior with scripts",
+    "relevant_document_ids": ["doc_021"]
+  },
+  {
+    "query": "What is quantum computing and dark matter?",
+    "relevant_document_ids": []
+  }
+]
