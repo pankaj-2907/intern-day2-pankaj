@@ -1,17 +1,15 @@
 from fastapi import FastAPI
-from app.routes.ai import router as ai_router
+from app.routes import search
 
 app = FastAPI(
-    title="AI Text Intelligence Service",
-    description="A modular FastAPI service powered by Google Gemini API for summarization, classification, and sentiment analysis.",
+    title="Semantic Document Search API",
+    description="API that performs meaning-based semantic document retrieval using Google embeddings and cosine similarity.",
     version="1.0.0"
 )
 
-# Include the AI routes
-app.include_router(ai_router)
+# Include the search router
+app.include_router(search.router)
 
 @app.get("/")
-def root():
-    return {
-        "message": "Welcome to the AI Text Intelligence Service! Navigate to /docs for interactive API documentation."
-    }
+def read_root():
+    return {"message": "Welcome to Semantic Document Search API"}

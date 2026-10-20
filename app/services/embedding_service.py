@@ -7,7 +7,7 @@ load_dotenv()
 
 # Initializing  Gemini client
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-EMBEDDING_MODEL = "text_embedding-004"
+EMBEDDING_MODEL = "gemini-embedding-001"
 
 def generate_embedding(text: str) -> list[float]:
     """
@@ -23,8 +23,14 @@ def generate_embedding(text: str) -> list[float]:
             contents=text,
         )
         # Extract the embedding values
-        if response and response.embedding:
-            return response.embedding.values
+        # response.embeddings is a list of embedding objects.
+        # Each object contains the vector values.
+        if response and response.embeddings:
+            # Access the first element of the list, then get its values
+            first_embedding = response.embeddings[0]
+            if hasattr(first_embedding, 'values'):
+                return first_embedding.values
+            return list(first_embedding)
         raise ValueError("Failed to retrieve embedding values from response.")
     
     except Exception as e:
