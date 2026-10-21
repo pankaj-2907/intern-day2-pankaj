@@ -1,8 +1,9 @@
 import pytest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from fastapi.testclient import TestClient
 from app.main import app
-from app.services.search_service import SearchService, cosine_similarity, generate_embedding
+from app.services.search_service import SearchService, cosine_similarity
+from app.services.embedding_service import generate_embedding
 
 client = TestClient(app)
 
@@ -15,12 +16,13 @@ def test_cosine_similarity():
     with pytest.raises(ValueError):
         cosine_similarity([1.0, 0.0], [1.0, 0.0, 0.0])
 
-@patch("google.genai.Client")
-def test_embedding_generation_and_failure(mock_client_class):
+@patch("app.services.embedding_service.client")
+def test_embedding_generation_and_failure(mock_client):
     """Test 3 & 10: Embedding generation mock and failure handling."""
-    mock_client = mock_client_class.return_value
-    mock_response = mock_client.models.embed_content.return_value
-    mock_response.embeddings = [[0.1, 0.2, 0.3]]
+    mock_embedding_item = MagicMock()
+    mock_embedding_item.values = [0.1, 0.2, 0.3]
+    
+    mock_client.models.embed_content.return_value.embeddings = [mock_embedding_item]
     
     vec = generate_embedding("test query")
     assert vec == [0.1, 0.2, 0.3]
