@@ -1,0 +1,98 @@
+[
+  {
+    "question": "How can unauthorized API access be prevented?",
+    "relevant_document_ids": ["doc_001"],
+    "expected_facts": [
+      "authentication",
+      "authorization",
+      "OAuth2"
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What is the recommended practice for handling API rate limits?",
+    "relevant_document_ids": ["doc_012"],
+    "expected_facts": [
+      "rate limiting",
+      "throttling",
+      "status code 429"
+    ],
+    "answerable": true
+  },
+  {
+    "question": "Why should sensitive configuration keys never be hardcoded?",
+    "relevant_document_ids": ["doc_014"],
+    "expected_facts": [
+      "environment variables",
+      ".env files",
+      "security risk"
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What is the purpose of input validation in REST APIs?",
+    "relevant_document_ids": ["doc_003"],
+    "expected_facts": [
+      "sanitization",
+      "prevent injection",
+      "malformed payload"
+    ],
+    "answerable": true
+  },
+  {
+    "question": "How should database connection errors be handled gracefully?",
+    "relevant_document_ids": ["doc_007"],
+    "expected_facts": [
+      "try-catch",
+      "HTTP 503",
+      "error logging"
+    ],
+    "answerable": true
+  },
+  {
+    "question": "How do rate limits and environment variables work together to secure an API backend?",
+    "relevant_document_ids": ["doc_012", "doc_014"],
+    "expected_facts": [
+      "rate limiting",
+      "environment variables",
+      "credentials protection"
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What combination of authentication measures and input checks should be implemented for robust endpoint security?",
+    "relevant_document_ids": ["doc_001", "doc_003"],
+    "expected_facts": [
+      "authentication",
+      "OAuth2",
+      "input validation"
+    ],
+    "answerable": true
+  },
+  {
+    "question": "In what ways can developers safeguard secret tokens and prevent DDoS attacks on public endpoints?",
+    "relevant_document_ids": ["doc_012", "doc_014"],
+    "expected_facts": [
+      "secret keys",
+      "rate limiting",
+      "env variables"
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What mechanisms help stop malicious actors from bypassing security gates through payload tampering?",
+    "relevant_document_ids": ["doc_001", "doc_003"],
+    "expected_facts": [
+      "authorization",
+      "input validation",
+      "payload"
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What is the company's protocol for underwater submarine satellite maintenance?",
+    "relevant_document_ids": [],
+    "expected_facts": [],
+    "answerable": false
+  }
+]
