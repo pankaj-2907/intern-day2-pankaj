@@ -1,16 +1,17 @@
 from fastapi import FastAPI
-from app.routes import search, document
+from app.routes import rag
+from dotenv import load_dotenv
+load_dotenv()
 
 app = FastAPI(
-    title="Semantic Document Search API",
-    description="API that performs meaning-based semantic document retrieval using Google embeddings and cosine similarity.",
+    title="Semantic RAG Document Search API",
+    description="API for retrieving context and generating grounded answers using Gemini LLM.",
     version="1.0.0"
 )
 
-# Include the search router
-app.include_router(search.router)
-app.include_router(document.router)
+# Include RAG routes
+app.include_router(rag.router)
 
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to Semantic Document Search API"}
+def root():
+    return {"message": "Welcome to the RAG Document QA API. Visit /docs for Swagger UI."}
