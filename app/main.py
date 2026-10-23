@@ -1,17 +1,14 @@
 from fastapi import FastAPI
-from app.routes import rag
-from dotenv import load_dotenv
-load_dotenv()
+from app.routes.assistant import router as assistant_router
 
 app = FastAPI(
-    title="Semantic RAG Document Search API",
-    description="API for retrieving context and generating grounded answers using Gemini LLM.",
+    title="AI Assistant with Executable Tools (Day 7 RAG)",
     version="1.0.0"
 )
 
-# Include RAG routes
-app.include_router(rag.router)
+# Include assistant endpoints
+app.include_router(assistant_router)
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to the RAG Document QA API. Visit /docs for Swagger UI."}
+    return {"message": "Welcome to Day 7 RAG Tool Calling API. Visit /docs for Swagger UI."}
