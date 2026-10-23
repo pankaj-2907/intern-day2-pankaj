@@ -1,0 +1,139 @@
+{
+  "test_cases": [
+    {
+      "id": "TC_CALC_01",
+      "category": "Calculator",
+      "input_message": "What is 45 plus 87?",
+      "expected_tool_selection": "calculate",
+      "expected_execution_behavior": "Executes calculate(operation='add', a=45, b=87) via registry with Pydantic validation.",
+      "expected_final_response": "45 plus 87 equals 132.",
+      "actual_outcome": "Passed backend verification. Pydantic validated operands as finite numbers; registry dispatched to calculate(); returned exact JSON payload {'result': 132}."
+    },
+    {
+      "id": "TC_CALC_02",
+      "category": "Calculator",
+      "input_message": "Subtract 19 from 100",
+      "expected_tool_selection": "calculate",
+      "expected_execution_behavior": "Executes calculate(operation='subtract', a=100, b=19) with numeric verification.",
+      "expected_final_response": "100 minus 19 equals 81.",
+      "actual_outcome": "Passed backend verification. Operation string matched 'subtract'; subtraction computed successfully in Python; returned {'result': 81} without using eval()."
+    },
+    {
+      "id": "TC_CALC_03",
+      "category": "Calculator",
+      "input_message": "Multiply 12 by 5",
+      "expected_tool_selection": "calculate",
+      "expected_execution_behavior": "Executes calculate(operation='multiply', a=12, b=5).",
+      "expected_final_response": "12 multiplied by 5 equals 60.",
+      "actual_outcome": "Passed backend verification. Validated arguments via Pydantic model; returned structured {'result': 60}."
+    },
+    {
+      "id": "TC_CALC_04",
+      "category": "Calculator",
+      "input_message": "Divide 144 by 12",
+      "expected_tool_selection": "calculate",
+      "expected_execution_behavior": "Executes calculate(operation='divide', a=144, b=12).",
+      "expected_final_response": "144 divided by 12 equals 12.",
+      "actual_outcome": "Passed backend verification. Non-zero denominator verified; division executed and returned {'result': 12.0}."
+    },
+    {
+      "id": "TC_CALC_05",
+      "category": "Calculator",
+      "input_message": "What is 50 divided by 0?",
+      "expected_tool_selection": "calculate",
+      "expected_execution_behavior": "Executes calculate(operation='divide', a=50, b=0); intercepts zero divisor in code logic.",
+      "expected_final_response": "Structured error message stating division by zero is not allowed.",
+      "actual_outcome": "Passed backend verification. Backend intercepted `b == 0` check, returning structured error payload `{'error': 'Division by zero is not allowed.'}` instead of raising an unhandled exception."
+    },
+    {
+      "id": "TC_TIME_01",
+      "category": "Date and Time",
+      "input_message": "What is the current time in Asia/Kolkata?",
+      "expected_tool_selection": "get_current_datetime",
+      "expected_execution_behavior": "Executes get_current_datetime(timezone='Asia/Kolkata') using zoneinfo.",
+      "expected_final_response": "Current ISO datetime with +05:30 offset.",
+      "actual_outcome": "Passed backend verification. ZoneInfo successfully validated 'Asia/Kolkata'; `datetime.now(tz)` executed dynamically without hardcoded values, returning timezone-aware ISO string."
+    },
+    {
+      "id": "TC_TIME_02",
+      "category": "Date and Time",
+      "input_message": "What is the current time in UTC?",
+      "expected_tool_selection": "get_current_datetime",
+      "expected_execution_behavior": "Executes get_current_datetime(timezone='UTC').",
+      "expected_final_response": "Current UTC datetime.",
+      "actual_outcome": "Passed backend verification. UTC zone parsed correctly; returned live timestamp with UTC offset."
+    },
+    {
+      "id": "TC_TIME_03",
+      "category": "Date and Time",
+      "input_message": "What is the time in Mars/Colony?",
+      "expected_tool_selection": "get_current_datetime",
+      "expected_execution_behavior": "Executes get_current_datetime(timezone='Mars/Colony'); catches ZoneInfo lookup error.",
+      "expected_final_response": "Structured error indicating invalid IANA timezone identifier.",
+      "actual_outcome": "Passed backend verification. `zoneinfo.ZoneInfo` raised an exception on invalid string; Pydantic validator caught it and returned structured error JSON."
+    },
+    {
+      "id": "TC_KB_01",
+      "category": "Knowledge Base",
+      "input_message": "How does API authentication work?",
+      "expected_tool_selection": "search_knowledge_base",
+      "expected_execution_behavior": "Executes search_knowledge_base(query='How does API authentication work?', top_k=3).",
+      "expected_final_response": "Relevant document chunks detailing API auth mechanisms with IDs and scores.",
+      "actual_outcome": "Passed backend verification. Retrieval service successfully queried index, returning results list containing `document_id`, `title`, `content`, and `score`."
+    },
+    {
+      "id": "TC_KB_02",
+      "category": "Knowledge Base",
+      "input_message": "Tell me about authorization tokens and security headers.",
+      "expected_tool_selection": "search_knowledge_base",
+      "expected_execution_behavior": "Executes search_knowledge_base with semantic query variant.",
+      "expected_final_response": "Summarized answer derived from retrieved RAG document chunks.",
+      "actual_outcome": "Passed backend verification. Semantic retrieval returned matching security documents; LLM successfully synthesized final response from backend content."
+    },
+    {
+      "id": "TC_KB_03",
+      "category": "Knowledge Base",
+      "input_message": "What is the recipe for chocolate chip cookies?",
+      "expected_tool_selection": "search_knowledge_base",
+      "expected_execution_behavior": "Executes search_knowledge_base; returns empty results list due to lack of matches.",
+      "expected_final_response": "Statement that no relevant documents were found in the knowledge base.",
+      "actual_outcome": "Passed backend verification. Retrieval returned empty list `[]`; service handled empty index gracefully without errors."
+    },
+    {
+      "id": "TC_EXEC_01",
+      "category": "Tool Selection and Execution",
+      "input_message": "Hello, how are you today?",
+      "expected_tool_selection": "None",
+      "expected_execution_behavior": "Model bypasses tool invocation and generates direct conversational response.",
+      "expected_final_response": "Friendly conversational greeting.",
+      "actual_outcome": "Passed backend verification. Execution loop detected empty `function_calls`, skipping registry dispatch and returning clean assistant response."
+    },
+    {
+      "id": "TC_EXEC_02",
+      "category": "Tool Selection and Execution",
+      "input_message": "Calculate 250 multiplied by 4",
+      "expected_tool_selection": "calculate",
+      "expected_execution_behavior": "Detects tool call, validates args, executes calculate tool, and returns final answer.",
+      "expected_final_response": "250 multiplied by 4 equals 1000.",
+      "actual_outcome": "Passed backend verification. Model invoked tool call; registry executed calculate; result fed back to model; final natural language answer generated."
+    },
+    {
+      "id": "TC_EXEC_03",
+      "category": "Tool Selection and Execution",
+      "input_message": "What time is it in UTC, and what is 50 plus 50?",
+      "expected_tool_selection": "get_current_datetime and calculate (sequential)",
+      "expected_execution_behavior": "Executes multiple sequential tool calls within max round limits.",
+      "expected_final_response": "Current UTC time and addition result (100).",
+      "actual_outcome": "Passed backend verification. Multi-round loop executed successfully within `max_rounds=5` limit, dispatching both datetime and calculator tools sequentially."
+    },
+    {
+      "id": "TC_EXEC_04",
+      "category": "Tool Selection and Execution",
+      "input_message": "[Simulated Model Response with Unknown Tool 'hack_system']",
+      "expected_tool_selection": "hack_system",
+      "expected_execution_behavior": "Registry rejects unknown tool name and returns structured error to model.",
+      "expected_final_response": "Notification that requested tool is unavailable.",
+      "actual_outcome": "Passed backend verification. Registry lookup `get_tool('hack_system')` returned `None`, triggering strict safety rejection payload without executing arbitrary code."
+    }
+  ]
+}

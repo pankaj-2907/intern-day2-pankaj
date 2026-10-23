@@ -14,7 +14,7 @@ class ToolCallingService:
     backend tool execution, and max round safeguards.
     """
 
-    def __init__(self, api_key: Optional[str] = None, model: str = "gemini-flash-latest", max_rounds: int = 5):
+    def __init__(self, api_key: Optional[str] = None, model: str = "gemini-3.8-flash", max_rounds: int = 5):
         # Initialize Gemini client using Google AI Studio API key
         self.client = genai.Client(api_key=api_key) if api_key else genai.Client()
         self.model = model
@@ -93,7 +93,7 @@ class ToolCallingService:
                     # Send tool execution result back to Gemini as a function response
                     contents.append(
                         types.Content(
-                            role="tool",
+                            role="user",
                             parts=[
                                 types.Part.from_function_response(
                                     name=function_name,
