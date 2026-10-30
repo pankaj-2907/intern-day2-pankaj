@@ -1,6 +1,9 @@
 from typing import Dict, Any, Optional
 from pydantic import BaseModel, Field, field_validator
+from app.services.retrieval_service import RetrievalService
 
+# Global instance
+_default_retrieval_service = RetrievalService()
 
 class KBQueryInput(BaseModel):
     query: str = Field(..., description="Search query string")
@@ -31,7 +34,10 @@ def search_knowledge_base(query: str, top_k: int = 3, retrieval_service: Optiona
     except Exception as e:
         return {"error": f"Invalid search input: {str(e)}", "results": [], "success": False}
 
-    if retrieval_service is None:
+    # Fallback to default module instance if none provided at runtime
+    active_service = retrieval_service if retrieval_service is not None else _default_retrieval_service
+
+    if active_service is None or not getattr(active_service, "chunks", None):
         return {
             "results": [],
             "message": "Retrieval service is not initialized or indexed documents are empty.",
@@ -39,7 +45,7 @@ def search_knowledge_base(query: str, top_k: int = 3, retrieval_service: Optiona
         }
 
     try:
-        results = retrieval_service.search(query=validated.query, top_k=validated.top_k)
+        results = active_service.search(query=validated.query, top_k=validated.top_k)
         formatted_results = []
         for item in results:
             formatted_results.append({
